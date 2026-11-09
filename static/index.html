@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1020">
+    <title>BENCHIN | Speech Intelligence</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="/" class="logo">BENCHIN<span>.</span></a>
+        <div class="nav-right">
+            <span class="status-dot"></span>
+            <span>Powered by Gnani AI</span>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="hero">
+            <div class="eyebrow">INTELLIGENT SPEECH PROCESSING</div>
+            <h1>Your speech.<br><span>Understood.</span></h1>
+            <p>Convert Indian-language speech into accurate, editable text with Gnani Prisma.</p>
+        </section>
+
+        <!-- AUDIO WORKSPACE -->
+        <section class="workspace">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Speech workspace</h2>
+                    <p>Upload an audio recording to get started.</p>
+                </div>
+                <span class="model-tag">PRISMA V3.0</span>
+            </div>
+
+            <form id="upload-form">
+
+                <label for="audio-file" class="upload-box" id="upload-box">
+                    <div class="upload-icon">↑</div>
+                    <h3>Drop your audio here</h3>
+                    <p>or <span>browse files</span> from your device</p>
+                    <small>WAV · MP3 · OGG · FLAC · AAC · M4A</small>
+                </label>
+
+                <input
+                    type="file"
+                    id="audio-file"
+                    accept=".wav,.mp3,.ogg,.flac,.aac,.m4a"
+                    hidden
+                >
+
+                <div id="file-info" class="file-info hidden">
+                    <span id="file-name"></span>
+                    <button type="button" id="remove-file">Remove</button>
+                </div>
+
+                <audio id="audio-preview" controls class="audio-preview hidden"></audio>
+
+                <button type="submit" id="transcribe-button" class="primary-button" disabled>
+                    Transcribe audio <span>→</span>
+                </button>
+
+            </form>
+
+            <div id="loading" class="loading hidden">
+                <div class="loader"></div>
+                <p>Processing your audio with Gnani Prisma...</p>
+            </div>
+
+            <div id="error-message" class="error-message hidden"></div>
+
+        </section>
+
+        <!-- TRANSCRIPTION RESULTS -->
+        <section id="result-section" class="result-section hidden">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Your transcript</h2>
+                    <p>Review and edit the generated transcription.</p>
+                </div>
+                <span id="language-label" class="model-tag">PRISMA V3.0</span>
+            </div>
+
+            <textarea
+                id="transcript"
+                placeholder="Your transcript will appear here..."
+                spellcheck="false"
+            ></textarea>
+
+            <div class="result-footer">
+                <span id="processing-time"></span>
+
+                <div class="result-actions">
+                    <button type="button" id="copy-button" class="secondary-button">
+                        Copy text
+                    </button>
+                    <button type="button" id="download-button" class="primary-button">
+                        Download TXT ↓
+                    </button>
+                </div>
+            </div>
+
+            <!-- EVALUATION SECTION -->
+            <div class="evaluation-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Transcription evaluation</h2>
+                        <p>Measure transcription quality against a human-verified reference.</p>
+                    </div>
+                </div>
+
+                <div class="evaluation-field">
+                    <label for="reference-transcript">
+                        Reference transcript
+                    </label>
+
+                    <textarea
+                        id="reference-transcript"
+                        placeholder="Paste the correct human-verified transcript here..."
+                        spellcheck="false"
+                    ></textarea>
+                </div>
+
+                <button
+                    type="button"
+                    id="evaluate-button"
+                    class="primary-button"
+                >
+                    Evaluate transcription →
+                </button>
+
+                <div id="evaluation-loading" class="loading hidden">
+                    <div class="loader"></div>
+                    <p>Calculating transcription metrics...</p>
+                </div>
+
+                <div id="evaluation-error" class="error-message hidden"></div>
+
+                <!-- METRICS DASHBOARD -->
+                <div id="evaluation-results" class="evaluation-results hidden">
+
+                    <div class="section-heading">
+                        <div>
+                            <h2>Evaluation results</h2>
+                            <p>Objective comparison of generated and reference text.</p>
+                        </div>
+                    </div>
+
+                    <div class="metric-grid">
+
+                        <div class="metric-card">
+                            <span>Word Error Rate (WER)</span>
+                            <strong id="wer-value">—</strong>
+                        </div>
+
+                        <div class="metric-card">
+                            <span>Character Error Rate (CER)</span>
+                            <strong id="cer-value">—</strong>
+                        </div>
+
+                        <div class="metric-card">
+                            <span>Substitutions</span>
+                            <strong id="substitution-value">—</strong>
+                        </div>
+
+                        <div class="metric-card">
+                            <span>Deletions</span>
+                            <strong id="deletion-value">—</strong>
+                        </div>
+
+                        <div class="metric-card">
+                            <span>Insertions</span>
+                            <strong id="insertion-value">—</strong>
+                        </div>
+
+                        <div class="metric-card">
+                            <span>Reference words</span>
+                            <strong id="reference-words-value">—</strong>
+                        </div>
+
+                    </div>
+
+                    <p class="metric-note">
+                        Lower WER and CER indicate fewer transcription errors.
+                        WER can exceed 100% when there are many insertions.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <footer>
+            <p>BENCHIN · Built with Gnani AI · Speech intelligence for Indian languages</p>
+        </footer>
+
+    </main>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
